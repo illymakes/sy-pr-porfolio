@@ -833,6 +833,21 @@ textarea {
   display: block;
 }
 
+.form-error {
+  display: none;
+  background: #FDF2F2;
+  border: 1px solid #F5C6C6;
+  color: #8B2020;
+  border-radius: 6px;
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  margin-top: 16px;
+}
+
+.form-error.show {
+  display: block;
+}
+
 
 /* ========================================
    FOOTER

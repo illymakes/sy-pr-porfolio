@@ -72,27 +72,46 @@
 })();
 
 
-/* --- Contact form (no back-end; shows success message) --- */
+/* --- Contact form — Formspree AJAX submission --- */
 (function () {
   const form = document.getElementById('contactForm');
   if (!form) return;
 
-  form.addEventListener('submit', function (e) {
+  // ⚠️  Replace with your Formspree form ID after signing up at formspree.io
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdawzben';
+
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const btn = form.querySelector('button[type="submit"]');
+    const btn     = form.querySelector('button[type="submit"]');
     const success = document.getElementById('formSuccess');
+    const error   = document.getElementById('formError');
 
     btn.textContent = 'Sending…';
     btn.disabled = true;
+    if (error) error.classList.remove('show');
 
-    // Simulate async (replace with Formspree / EmailJS call if desired)
-    setTimeout(() => {
-      form.reset();
-      btn.textContent = 'Send Message';
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json' },
+        body:    new FormData(form),
+      });
+
+      if (res.ok) {
+        form.reset();
+        if (success) success.classList.add('show');
+      } else {
+        const data = await res.json();
+        throw new Error(data.error || 'Submission failed');
+      }
+    } catch (err) {
+      console.error('Form error:', err);
+      if (error) error.classList.add('show');
+    } finally {
+      btn.innerHTML = 'Send Message <span class="arrow">→</span>';
       btn.disabled = false;
-      if (success) success.classList.add('show');
-    }, 1200);
+    }
   });
 })();
 
