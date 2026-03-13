@@ -1,0 +1,41 @@
+# Shannon Yardley — PR & Communications Portfolio
+
+A personal portfolio website for Shannon Yardley, a Public Relations & Communications professional. The site showcases work samples, skills, and provides a way for potential employers and clients to get in touch.
+
+**Live site:** [shannonyardley.com](https://shannonyardley.com)
+
+---
+
+## Pages
+
+- **Home** — Hero introduction with a call to action
+- **About** — Background, experience, and professional summary
+- **Portfolio** — Work samples organized by category (writing, social media, photography), with downloadable PDFs
+- **Skills** — Overview of core competencies and areas of expertise
+- **Contact** — Contact form with spam protection
+
+---
+
+## Built With
+
+- HTML5, CSS3, Vanilla JavaScript — no frameworks or build tools
+- [Formspree](https://formspree.io) — contact form handling and email delivery
+- [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) — CAPTCHA spam protection
+- [Google Fonts](https://fonts.google.com) — Playfair Display & Inter
+- Hosted on [Hostinger](https://www.hostinger.com), deployed via GitHub Actions (FTP)
+
+---
+
+## Features
+
+- Fully responsive design — mobile, tablet, and desktop
+- Downloadable portfolio work samples (PDF)
+- AJAX contact form with success/error feedback
+- Smooth scroll and subtle load animations
+- Accessible markup with ARIA labels and semantic HTML
+
+---
+
+## Deployment
+
+Pushes to `main` automatically deploy to Hostinger via the FTP Deploy GitHub Action. FTP credentials are stored as GitHub repository secrets.
