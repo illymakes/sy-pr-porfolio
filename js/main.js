@@ -72,12 +72,18 @@
 })();
 
 
+/* --- Turnstile state callbacks (global, called by Cloudflare's script) --- */
+var _turnstileReady = false;
+function onTurnstileSuccess() { _turnstileReady = true; }
+function onTurnstileError()   { _turnstileReady = false; }
+function onTurnstileExpired() { _turnstileReady = false; }
+
+
 /* --- Contact form — Formspree AJAX submission --- */
 (function () {
   const form = document.getElementById('contactForm');
   if (!form) return;
 
-  // ⚠️  Replace with your Formspree form ID after signing up at formspree.io
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdawzben';
 
   form.addEventListener('submit', async function (e) {
@@ -87,9 +93,18 @@
     const success = document.getElementById('formSuccess');
     const error   = document.getElementById('formError');
 
+    // Block submission if Turnstile hasn't verified yet
+    if (!_turnstileReady) {
+      if (error) {
+        error.textContent = 'Please wait for the security check to complete.';
+        error.classList.add('show');
+      }
+      return;
+    }
+
     btn.textContent = 'Sending…';
     btn.disabled = true;
-    if (error) error.classList.remove('show');
+    if (error) { error.classList.remove('show'); error.textContent = 'Something went wrong — please try again or email me directly.'; }
 
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
@@ -100,6 +115,8 @@
 
       if (res.ok) {
         form.reset();
+        _turnstileReady = false;
+        if (typeof turnstile !== 'undefined') turnstile.reset();
         if (success) success.classList.add('show');
       } else {
         const data = await res.json();

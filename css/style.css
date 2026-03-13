@@ -141,6 +141,7 @@ ul {
   background: var(--navy);
   border-radius: 2px;
   transition: transform var(--transition), opacity var(--transition);
+  pointer-events: none;
 }
 
 .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -846,6 +847,10 @@ textarea {
 
 .form-error.show {
   display: block;
+}
+
+.cf-turnstile {
+  margin-bottom: 16px;
 }
 
 

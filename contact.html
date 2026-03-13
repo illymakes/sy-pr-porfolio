@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Shannon Yardley</title>
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
   <meta name="description" content="Get in touch with Shannon Yardley, PR & Communications Professional." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -13,7 +14,7 @@
   <nav class="navbar" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">Shannon Yardley</a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <button type="button" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" role="list">
@@ -97,6 +98,15 @@
               <textarea id="message" name="message" placeholder="Tell me about your project or inquiry…" required></textarea>
             </div>
 
+            <div class="cf-turnstile"
+              data-sitekey="0x4AAAAAACp-GoIh4ImrDb8U"
+              data-theme="light"
+              data-retry="auto"
+              data-retry-interval="2000"
+              data-callback="onTurnstileSuccess"
+              data-error-callback="onTurnstileError"
+              data-expired-callback="onTurnstileExpired"></div>
+
             <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;">
               Send Message <span class="arrow">→</span>
             </button>
@@ -131,6 +141,7 @@
     <p class="footer-copy">&copy; <span id="year"></span> Shannon Yardley. All rights reserved.</p>
   </footer>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="js/main.js"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
