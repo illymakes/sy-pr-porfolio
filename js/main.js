@@ -53,22 +53,12 @@
 })();
 
 
-/* --- Hero subtle parallax + loaded class --- */
+/* --- Hero loaded class --- */
 (function () {
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
-  // Trigger the subtle zoom-out animation
   requestAnimationFrame(() => hero.classList.add('loaded'));
-
-  // Parallax on scroll
-  const bg = hero.querySelector('.hero-bg');
-  if (!bg) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > window.innerHeight) return;
-    bg.style.transform = `scale(1) translateY(${window.scrollY * 0.3}px)`;
-  }, { passive: true });
 })();
 
 

@@ -13,8 +13,8 @@
 }
 
 :root {
-  --navy:      #1C1C2E;
-  --navy-mid:  #2D2D44;
+  --navy:      #272727;
+  --navy-mid:  #2A4035;
   --gold:      #C9A96E;
   --gold-light:#D4B97E;
   --white:     #FFFFFF;
@@ -40,6 +40,9 @@ body {
   background: var(--white);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 img {
@@ -155,8 +158,8 @@ ul {
 
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  flex: 1;
+  min-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,7 +173,7 @@ ul {
   inset: 0;
   background-image: url('../assets/images/hero.jpg');
   background-size: cover;
-  background-position: center top;
+  background-position: center 20%;
   background-repeat: no-repeat;
   transform: scale(1.03);
   transition: transform 8s ease;
@@ -185,9 +188,9 @@ ul {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(15, 15, 30, 0.35) 0%,
-    rgba(15, 15, 30, 0.50) 50%,
-    rgba(15, 15, 30, 0.65) 100%
+    rgba(10, 22, 16, 0.45) 0%,
+    rgba(10, 22, 16, 0.65) 50%,
+    rgba(10, 22, 16, 0.80) 100%
   );
 }
 
@@ -205,6 +208,7 @@ ul {
   line-height: 1.1;
   letter-spacing: -0.01em;
   margin-bottom: 16px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content .tagline {
@@ -213,7 +217,8 @@ ul {
   letter-spacing: 0.05em;
   text-transform: none;
   margin-bottom: 20px;
-  opacity: 0.92;
+  opacity: 0.95;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
 }
 
 .hero-content .description {
@@ -221,8 +226,9 @@ ul {
   font-weight: 300;
   max-width: 540px;
   margin: 0 auto 40px;
-  opacity: 0.82;
+  opacity: 0.90;
   line-height: 1.8;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Buttons */
