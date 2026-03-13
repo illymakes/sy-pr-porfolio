@@ -1,3 +1,32 @@
-README.md
+# Git
+.git/
 .gitignore
+.gitattributes
+
+# GitHub Actions
+.github/
+
+# FTP / Deploy config
 .ftpignore
+.ftp-deploy-sync-state.json
+
+# Dev / Editor
+.vscode/
+*.code-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & temp
+*.log
+*.tmp
+*.bak
+
+# Node (if ever used locally)
+node_modules/
+package.json
+package-lock.json
+
+# Docs (internal only)
+README.md
+images/README.txt
