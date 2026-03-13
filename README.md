@@ -18,11 +18,12 @@ A personal portfolio website for Shannon Yardley, a Public Relations & Communica
 
 ## Built With
 
-- HTML5, CSS3, Vanilla JavaScript — no frameworks or build tools
-- [Formspree](https://formspree.io) — contact form handling and email delivery
-- [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) — CAPTCHA spam protection
-- [Google Fonts](https://fonts.google.com) — Playfair Display & Inter
-- Hosted on [Hostinger](https://www.hostinger.com), deployed via GitHub Actions (FTP)
+- **HTML5, CSS3, Vanilla JavaScript** — no frameworks or build tools
+- **[Formspree](https://formspree.io)** — contact form handling and email delivery
+- **[Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)** — CAPTCHA spam protection
+- **[Google Fonts](https://fonts.google.com)** — Playfair Display & Inter
+- **GitHub Actions** — CI/CD pipeline
+- **[Hostinger](https://www.hostinger.com)** — hosting via FTP deploy
 
 ---
 
@@ -36,6 +37,39 @@ A personal portfolio website for Shannon Yardley, a Public Relations & Communica
 
 ---
 
+## Project Structure
+
+```
+sy-pr-portfolio/
+├── index.html
+├── about.html
+├── contact.html
+├── skills.html
+├── portfolio/
+│   └── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── main.js
+├── assets/
+│   └── images/
+│   └── downloads/
+└── .github/
+    └── workflows/
+        └── deploy.yaml
+```
+
+---
+
 ## Deployment
 
-Pushes to `main` automatically deploy to Hostinger via the FTP Deploy GitHub Action. FTP credentials are stored as GitHub repository secrets.
+Pushes to `main` automatically deploy to Hostinger via the [FTP Deploy Action](https://github.com/SamKirkland/FTP-Deploy-Action).
+
+```yaml
+# .github/workflows/deploy.yaml
+on:
+  push:
+    branches: [main]
+```
+
+FTP credentials are stored as GitHub encrypted repository secrets (`FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`) and never appear in code.
