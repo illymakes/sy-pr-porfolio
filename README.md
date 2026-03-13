@@ -8,11 +8,13 @@ A personal portfolio website for Shannon Yardley, a Public Relations & Communica
 
 ## Pages
 
-- **Home** — Hero introduction with a call to action
-- **About** — Background, experience, and professional summary
-- **Portfolio** — Work samples organized by category (writing, social media, photography), with downloadable PDFs
-- **Skills** — Overview of core competencies and areas of expertise
-- **Contact** — Contact form with spam protection
+| Page | Description |
+|------|-------------|
+| `index.html` | Hero introduction with a call to action |
+| `about.html` | Background, experience, and professional summary |
+| `/portfolio/index.html` | Work samples organized by category (writing, social media, photography), with downloadable PDFs |
+| `skills.html` | Overview of core competencies and areas of expertise |
+| `contact.html` | Contact form with spam protection |
 
 ---
 
