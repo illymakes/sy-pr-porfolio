@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Shannon Yardley</title>
+  <meta name="description" content="Shannon Yardley's portfolio — writing samples, social media work, and photography." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* ── Filter tabs ── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .filter-btn {
+      padding: 8px 22px;
+      border-radius: 100px;
+      border: 1.5px solid var(--gray-200);
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .filter-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+
+    /* ── Project items ── */
+    .project-item {
+      display: block;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .project-item.hidden {
+      display: none;
+    }
+
+    /* ── Category colour accents ── */
+    .tag-writing   { color: #5B7FA6; }
+    .tag-social    { color: #7A9E7E; }
+    .tag-photography { color: #A6845B; }
+
+    /* ── Download grid ── */
+    .project-downloads {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    /* ── Collapsible body ── */
+    .project-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 28px 32px;
+      text-align: left;
+      gap: 16px;
+    }
+
+    .project-toggle:focus-visible {
+      outline: 2px solid var(--navy);
+      outline-offset: -2px;
+    }
+
+    .toggle-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .toggle-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .toggle-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      align-items: center;
+    }
+
+    .toggle-chevron {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition), background var(--transition);
+      font-size: 0.75rem;
+      color: var(--navy);
+    }
+
+    .project-item.open .toggle-chevron {
+      transform: rotate(180deg);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .project-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .project-body-inner {
+      padding: 0 32px 28px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .project-body-inner p {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      line-height: 1.85;
+      margin-top: 20px;
+    }
+
+    /* ── Download button ── */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    @media (max-width: 600px) {
+      .project-toggle { padding: 20px; }
+      .project-body-inner { padding: 0 20px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Shannon Yardley</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="index.html" class="active">Portfolio</a></li>
+        <li><a href="../skills.html">Skills</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Portfolio</p>
+    <h1>Portfolio</h1>
+    <p>Writing samples, social media work, and photography — all in one place.</p>
+  </header>
+
+  <!-- PORTFOLIO CONTENT -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Filter bar -->
+      <div class="filter-bar" role="group" aria-label="Filter by category">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="writing">Writing Samples</button>
+        <button class="filter-btn" data-filter="social">Social Media</button>
+        <button class="filter-btn" data-filter="photography">Photography</button>
+      </div>
+
+      <!-- ════════════════════════════════
+           WRITING SAMPLES
+           ════════════════════════════════ -->
+
+      <!-- 1. NWICA — Writing -->
+      <article class="project-item" data-category="writing">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-writing">Writing Samples</span>
+              <span>Sept. 2023 – Dec. 2023</span>
+            </div>
+            <div class="toggle-title">Northwest Indiana Community Action</div>
+            <div class="toggle-meta">Communication / Marketing Internship</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              As the Communication/Marketing Intern at Northwest Indiana Community Action, I was responsible
+              for the development of comprehensive PowerPoint presentations through research on the variety
+              of programs offered. I created flyers, press releases, emails directed towards
+              exhibitors/vendors, internal newsletters, and designed a donor journey email strategy.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Donor_Journey.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Donor Journey
+              </a>
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Email.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Press Email
+              </a>
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Internal_Newsletter.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Internal Newsletter
+              </a>
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_PowerPoints.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PowerPoints
+              </a>
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Press_Releases.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Press Releases
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Freelance Blog Post -->
+      <article class="project-item" data-category="writing">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-writing">Writing Samples</span>
+              <span>Mar. 2023</span>
+            </div>
+            <div class="toggle-title">Freelance Blog Post</div>
+            <div class="toggle-meta">Local Coffee Company</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              A commissioned blog post for a local coffee company examining the physiological effects of
+              coffee consumption, presented in a pros and cons format.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Crema_Blog_Post.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Blog Post
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Advanced PR -->
+      <article class="project-item" data-category="writing">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-writing">Writing Samples</span>
+              <span>Sept. 2021 – Dec. 2021</span>
+            </div>
+            <div class="toggle-title">Advanced PR</div>
+            <div class="toggle-meta">Purdue University Northwest</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              Independent research on local nonprofits, resulting in a full communications strategy,
+              crisis management plan, and publics list. Press releases were published in local newspapers,
+              with media reporting documentation included.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Advanced_PR_Communication_Plan.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Communications Plan
+              </a>
+              <a href="../assets/downloads/Advanced_PR_Crisis_Plan.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Crisis Plan
+              </a>
+              <a href="../assets/downloads/Advanced_PR_Media_Report.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Media Report
+              </a>
+              <a href="../assets/downloads/Advanced_PR_Publics_List.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Publics List
+              </a>
+              <a href="../assets/downloads/Advanced_PR_Published_Press_Releases.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Published Press Releases
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Pride Connection — Writing -->
+      <article class="project-item" data-category="writing">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-writing">Writing Samples</span>
+              <span>Jan. 2021 – May 2021</span>
+            </div>
+            <div class="toggle-title">Problems in PR — Pride Connection</div>
+            <div class="toggle-meta">Purdue University Northwest · CEO</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              A Purdue University Northwest course where students ran a PR consulting firm. I served as CEO,
+              managing 18 consultants and coordinating a 500-page communication audit book for Pride Connection.
+              Responsibilities included internal and external communication audits, client presentations,
+              and grammatical editing of all deliverables.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Pride_Connection_Business_cardbrochure_and_audit_book.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Business Card, Brochure &amp; Audit Book
+              </a>
+              <a href="../assets/downloads/Pride_Connection_Duty_as_CEO.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Duty as CEO
+              </a>
+              <a href="../assets/downloads/Pride_Connection_Final_Client_Presentation.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Final Client Presentation
+              </a>
+              <a href="../assets/downloads/Pride_Connection_Surveys.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Surveys
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. PNW Pioneer Newspaper -->
+      <article class="project-item" data-category="writing">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-writing">Writing Samples</span>
+              <span>Feb. 2020 – June 2020</span>
+            </div>
+            <div class="toggle-title">PNW Pioneer Newspaper</div>
+            <div class="toggle-meta">Advanced Journalism · Purdue University Northwest</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              Advanced Journalism coursework involving story ideation, source interviews, and publication
+              in the PNW Pioneer Newspaper. Published beats are included below.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/PNW_Pioneer_Published_Beats.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Published Beats
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ════════════════════════════════
+           SOCIAL MEDIA
+           ════════════════════════════════ -->
+
+      <!-- 6. NWICA — Social Media -->
+      <article class="project-item" data-category="social">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-social">Social Media</span>
+              <span>Sept. 2023 – Dec. 2023</span>
+            </div>
+            <div class="toggle-title">Northwest Indiana Community Action</div>
+            <div class="toggle-meta">Communication / Marketing Internship</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              Social media posts were created and approved by the Communication Manager on monthly deadlines.
+              The portfolio includes drafted posts for future months and events, demonstrating content planning
+              and brand voice consistency across platforms.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Conference_Draft_Posts.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Conference Draft Posts
+              </a>
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Drafted_Posts.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Drafted Posts
+              </a>
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Social_Media.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Social Media Overview
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. Pride Connection — Social Media -->
+      <article class="project-item" data-category="social">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-social">Social Media</span>
+              <span>Jan. 2021 – May 2021</span>
+            </div>
+            <div class="toggle-title">Problems in PR — Pride Connection</div>
+            <div class="toggle-meta">Purdue University Northwest</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              As part of a student-run PR consulting firm, the team conducted internal and external
+              communication audits for PNW Information Services during the pandemic. Informative social
+              media posts were created to highlight team members and communicate audit findings.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Pride_Connection_Social_Media.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Social Media
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ════════════════════════════════
+           PHOTOGRAPHY
+           ════════════════════════════════ -->
+
+      <!-- 8. NWICA — Photography -->
+      <article class="project-item" data-category="photography">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-photography">Photography</span>
+              <span>Sept. 2023 – Dec. 2023</span>
+            </div>
+            <div class="toggle-title">Northwest Indiana Community Action</div>
+            <div class="toggle-meta">Communication / Marketing Internship</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              As an intern for NWICA, I was assigned to photograph events. Displayed are photos from
+              the Reimagine Conference in 2023 of the guest speakers.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/Northwest_Indiana_Community_Action_Photography.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Photography
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9. PNW Pioneer — Photography -->
+      <article class="project-item" data-category="photography">
+        <div class="project-toggle" aria-expanded="false">
+          <div class="toggle-left">
+            <div class="toggle-meta">
+              <span class="portfolio-card-tag tag-photography">Photography</span>
+              <span>Oct. 2020 – May 2021</span>
+            </div>
+            <div class="toggle-title">PNW Pioneer Newspaper</div>
+            <div class="toggle-meta">Head Photographer &amp; Photo Editor · Purdue University Northwest</div>
+          </div>
+          <div class="toggle-chevron" aria-hidden="true">▼</div>
+        </div>
+        <div class="project-body" role="region">
+          <div class="project-body-inner">
+            <p>
+              My role began as a photographer capturing the essence of the school community. Over time,
+              I became Head Photographer and Photo Editor, assigning events to students, covering various
+              school activities, and using Adobe Lightroom to refine imagery.
+            </p>
+            <div class="project-downloads">
+              <a href="../assets/downloads/PNW_Pioneer_Published_Photography.pdf" class="download-btn" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Published Photography
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Shannon Yardley</div>
+        <div class="footer-tagline">PR &amp; Communications Professional</div>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../about.html">About</a>
+        <a href="index.html">Portfolio</a>
+        <a href="../skills.html">Skills</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+    <p class="footer-copy">&copy; <span id="year"></span> Shannon Yardley. All rights reserved.</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ── Filter logic ── */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects   = document.querySelectorAll('.project-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        projects.forEach(p => {
+          p.classList.toggle('hidden', filter !== 'all' && p.dataset.category !== filter);
+        });
+      });
+    });
+
+    /* ── Accordion logic ── */
+    projects.forEach(item => {
+      const toggle = item.querySelector('.project-toggle');
+      const body   = item.querySelector('.project-body');
+
+      toggle.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        // Close all others
+        projects.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('open');
+            other.querySelector('.project-toggle').setAttribute('aria-expanded', 'false');
+            other.querySelector('.project-body').style.maxHeight = null;
+          }
+        });
+
+        // Toggle this one
+        item.classList.toggle('open', !isOpen);
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        body.style.maxHeight = isOpen ? null : body.scrollHeight + 'px';
+      });
+    });
+  </script>
+</body>
+</html>
