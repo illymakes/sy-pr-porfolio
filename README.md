@@ -75,3 +75,5 @@ on:
 ```
 
 FTP credentials are stored as GitHub encrypted repository secrets (`FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`) and never appear in code.
+
+*Built by [illymakes](https://github.com/illymakes)*
