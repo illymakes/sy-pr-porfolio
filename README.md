@@ -36,6 +36,7 @@ A personal portfolio website for Shannon Yardley, a Public Relations & Communica
 - AJAX contact form with success/error feedback
 - Smooth scroll and subtle load animations
 - Accessible markup with ARIA labels and semantic HTML
+- SEO optimised — Open Graph tags, Twitter Card tags, canonical URLs, JSON-LD Person schema, sitemap, and robots.txt
 
 ---
 
@@ -47,14 +48,16 @@ sy-pr-portfolio/
 ├── about.html
 ├── contact.html
 ├── skills.html
+├── sitemap.xml
+├── robots.txt
 ├── portfolio/
 │   └── index.html
 ├── css/
-│   └── styles.css
+│   └── style.css
 ├── js/
 │   └── main.js
 ├── assets/
-│   └── images/
+│   ├── images/
 │   └── downloads/
 └── .github/
     └── workflows/
