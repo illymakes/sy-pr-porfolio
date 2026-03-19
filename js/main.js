@@ -53,14 +53,6 @@
 })();
 
 
-/* --- Hero loaded class --- */
-(function () {
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
-
-  requestAnimationFrame(() => hero.classList.add('loaded'));
-})();
-
 
 /* --- Turnstile state callbacks (global, called by Cloudflare's script) --- */
 var _turnstileReady = false;

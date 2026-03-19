@@ -175,12 +175,6 @@ ul {
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
-  transform: scale(1.03);
-  transition: transform 8s ease;
-}
-
-.hero.loaded .hero-bg {
-  transform: scale(1);
 }
 
 .hero-overlay {
@@ -207,7 +201,7 @@ ul {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.01em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
@@ -216,7 +210,7 @@ ul {
   font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: none;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   opacity: 0.95;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
 }
@@ -225,7 +219,7 @@ ul {
   font-size: clamp(0.85rem, 1.5vw, 1rem);
   font-weight: 300;
   max-width: 540px;
-  margin: 0 auto 40px;
+  margin: 0 auto 28px;
   opacity: 0.90;
   line-height: 1.8;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
@@ -811,6 +805,7 @@ select {
   transition: border-color var(--transition), box-shadow var(--transition);
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 input:focus,
@@ -867,7 +862,7 @@ textarea {
 .footer {
   background: var(--navy);
   color: rgba(255,255,255,0.7);
-  padding: 48px 32px;
+  padding: 28px 32px;
 }
 
 .footer-inner {
@@ -912,11 +907,11 @@ textarea {
   font-size: 0.78rem;
   opacity: 0.45;
   text-align: center;
-  margin-top: 32px;
+  margin-top: 16px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 24px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -1052,4 +1047,26 @@ textarea {
   .hero-content h1 { font-size: 2.4rem; }
   .portfolio-grid { grid-template-columns: 1fr; }
   .skills-grid    { grid-template-columns: 1fr; }
+}
+
+/* ── Short viewport: small laptops with HiDPI scaling (e.g. 14" 2560×1600 at 200%) ── */
+@media (max-height: 900px) and (min-width: 701px) {
+  .hero-content h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    margin-bottom: 10px;
+  }
+
+  .hero-content .tagline {
+    margin-bottom: 10px;
+  }
+
+  .hero-content .description {
+    margin-bottom: 20px;
+    font-size: clamp(0.8rem, 1.4vw, 0.92rem);
+    line-height: 1.7;
+  }
+
+  .btn {
+    padding: 11px 26px;
+  }
 }
